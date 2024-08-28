@@ -7,7 +7,7 @@ const usersSchema = new Schema(
     password: { type: String, required: true },
     gender: { type: String, enum: ['male', 'female', 'other'], required: true },
     photo: { type: String, default: '' },
-    dailyNorma: { type: Number, default: 0 },
+    dailyNorma: { type: Number, default: 2000 },
   },
   { timestamps: true, versionKey: false },
 );
