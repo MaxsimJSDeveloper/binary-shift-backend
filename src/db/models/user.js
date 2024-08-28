@@ -4,7 +4,7 @@ const usersSchema = new Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    password: { type: String, minlength: 8, maxlength: 64, required: true },
     gender: { type: String, enum: ['male', 'female', 'other'], required: true },
     photo: { type: String, default: '' },
     dailyNorma: { type: Number, default: 0 },
