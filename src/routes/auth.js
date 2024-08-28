@@ -1,18 +1,18 @@
 import express from 'express';
-import ctrlWrapper from '../utils/ctrlWrapper';
-import { registerUserSchema } from '../validation/auth';
-import { registerUserController } from '../controllers/auth';
-import { validateBody } from '../middlewares/validateBody';
+import { ctrlWrapper } from '../utils/ctrlWrapper.js';
+import { registerUserSchema } from '../validation/auth.js';
+import { registerUserController } from '../controllers/auth.js';
+import { validateBody } from '../middlewares/validateBody.js';
 
 
-const router = express.Router();
+const authRouter = express.Router();
 const parseJSON = express.json();
 
-router.post(
+authRouter.post(
   '/register',
   parseJSON,
   validateBody(registerUserSchema),
   ctrlWrapper(registerUserController),
 );
 
-export default router;
+export default authRouter;

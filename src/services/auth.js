@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import createHttpError from 'http-errors';
-import { UsersCollection } from '../db/models/user';
+import { UsersCollection } from '../db/models/user.js';
 
 export const registerUser = async (payload) => {
   const existingUser = await UsersCollection.findOne({ email: payload.email });
