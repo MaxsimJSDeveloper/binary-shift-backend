@@ -2,7 +2,7 @@ import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
 
-// import { env } from './utils/env.js';
+import { env } from './utils/env.js';
 import router from './routes/index.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
@@ -10,7 +10,7 @@ import cookieParser from 'cookie-parser';
 // import { UPLOAD_DIR } from './constants/index.js';
 // import { swaggerDocs } from './middlewares/swaggerDocs.js';
 
-const PORT = 3000;
+const PORT = Number(env('PORT', '8080'));
 
 export const startServer = () => {
   const app = express();
