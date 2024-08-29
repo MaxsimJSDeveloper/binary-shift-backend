@@ -4,24 +4,30 @@ import { registerUserSchema, loginUserSchema } from '../validation/auth.js';
 import {
   registerUserController,
   loginUserController,
+  logoutUserController,
+  refreshUserSessionController,
 } from '../controllers/auth.js';
 import { validateBody } from '../middlewares/validateBody.js';
 
-const authRouter = express.Router();
+const router = express.Router();
 const parseJSON = express.json();
 
-authRouter.post(
+router.post(
   '/register',
   parseJSON,
   validateBody(registerUserSchema),
   ctrlWrapper(registerUserController),
 );
 
-authRouter.post(
+router.post(
   '/login',
   parseJSON,
   validateBody(loginUserSchema),
   ctrlWrapper(loginUserController),
 );
 
-export default authRouter;
+router.post('/logout', parseJSON, ctrlWrapper(logoutUserController));
+
+router.post('/refresh', ctrlWrapper(refreshUserSessionController));
+
+export default router;
