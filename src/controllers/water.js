@@ -6,14 +6,16 @@ import {
   getDailyNorma,
   updateWater,
 } from '../services/water.js';
+import { parseFilterParams } from '../utils/parseFilterParams.js';
 
 export const getWaterController = async (req, res) => {
-  const waterPortions = await getAllWater();
+  const filter = parseFilterParams(req.query);
 
+  const waters = await getAllWater({ filter });
   res.status(200).json({
     status: 200,
-    message: `Success!`,
-    data: waterPortions,
+    message: 'Success!',
+    data: waters,
   });
 };
 

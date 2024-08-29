@@ -11,10 +11,10 @@ export const addWater = async (payload) => {
   return water;
 };
 
-export const getAllWater = async () => {
-  const allPortionsOfWater = await WatersCollection.find();
+export const getAllWater = async ({ filter = {} }) => {
+  const formattedPortions = await WatersCollection.find();
 
-  const formattedPortions = allPortionsOfWater.map((portion) => ({
+  const formattedResult = formattedPortions.map((portion) => ({
     _id: portion._id,
     date: reformDate(portion.date),
     volume: portion.volume,
@@ -22,7 +22,16 @@ export const getAllWater = async () => {
     updatedAt: portion.updatedAt,
   }));
 
-  return formattedPortions;
+  if (filter.day !== undefined || filter.month) {
+    return formattedResult.filter((portion) => {
+      const [day, month] = portion.date.split(', ');
+      const matchesDay = filter.day ? parseInt(day) === filter.day : true;
+      const matchesMonth = filter.month ? month === filter.month : true;
+      return matchesDay && matchesMonth;
+    });
+  }
+
+  return formattedResult;
 };
 
 export const updateWater = async (id, payload, options = {}) => {
