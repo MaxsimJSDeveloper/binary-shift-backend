@@ -2,7 +2,7 @@ import { model, Schema, Types } from 'mongoose';
 
 const watersSchema = new Schema(
   {
-    date: { type: Date, required: false },
+    date: { type: Date, required: true },
     volume: { type: Number, required: true },
     userId: { type: Types.ObjectId, ref: 'users', required: false },
   },

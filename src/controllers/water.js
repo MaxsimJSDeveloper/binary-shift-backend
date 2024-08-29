@@ -1,4 +1,11 @@
-import { addWater, getAllWater, getDailyNorma } from '../services/water.js';
+import createHttpError from 'http-errors';
+import {
+  addWater,
+  deleteWater,
+  getAllWater,
+  getDailyNorma,
+  updateWater,
+} from '../services/water.js';
 
 export const getWaterController = async (req, res) => {
   const waterPortions = await getAllWater();
@@ -25,11 +32,42 @@ export const addWaterController = async (req, res) => {
   });
 };
 
+export const updateWaterController = async (req, res) => {
+  const { id } = req.params;
+
+  const result = await updateWater(id, {
+    ...req.body,
+    // userId: req.user._id,
+  });
+
+  if (!result) {
+    return res.status(404).json({ message: 'Water not found' });
+  }
+
+  res.json({
+    status: 200,
+    message: 'Successfully updated water data!',
+    data: result,
+  });
+};
+
+export const deleteWaterController = async (req, res) => {
+  const { id } = req.params;
+
+  const deletedWater = await deleteWater(id);
+
+  res.status(200).json({
+    status: 200,
+    message: 'Successfully deleted',
+    data: deletedWater,
+  });
+};
+
 export const getDailyNormaController = async (req, res) => {
   const data = await getDailyNorma();
 
   res.status(200).json({
     message: `Success!`,
-    dailyNorma: data.dailyNorma,
+    dailyNorma: data,
   });
 };
