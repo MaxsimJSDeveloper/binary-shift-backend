@@ -16,6 +16,7 @@ export const getWaterController = async (req, res) => {
     status: 200,
     message: 'Success!',
     data: waters,
+    amountOfWater: waters.length,
   });
 };
 
