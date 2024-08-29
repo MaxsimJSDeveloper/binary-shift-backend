@@ -1,5 +1,6 @@
 import { UsersCollection } from '../db/models/user.js';
 import { WatersCollection } from '../db/models/water.js';
+import { reformDate } from '../utils/reformDate.js';
 
 export const addWater = async (payload) => {
   const water = new WatersCollection({
@@ -12,12 +13,19 @@ export const addWater = async (payload) => {
 
 export const getAllWater = async () => {
   const allPortionsOfWater = await WatersCollection.find();
-  return allPortionsOfWater;
+
+  const formattedPortions = allPortionsOfWater.map((portion) => ({
+    _id: portion._id,
+    date: reformDate(portion.date),
+    volume: portion.volume,
+    createdAt: portion.createdAt,
+    updatedAt: portion.updatedAt,
+  }));
+
+  return formattedPortions;
 };
 
 export const updateWater = async (id, payload, options = {}) => {
-  console.log('Payload to update:', payload);
-
   const rawResult = await WatersCollection.findOneAndUpdate(
     { _id: id },
     payload,
