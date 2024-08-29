@@ -7,6 +7,7 @@ import {
   logoutUserController,
   refreshUserSessionController,
 } from '../controllers/auth.js';
+import { authorize } from '../middlewares/authorize.js';
 import { validateBody } from '../middlewares/validateBody.js';
 
 const router = express.Router();
@@ -26,8 +27,9 @@ router.post(
   ctrlWrapper(loginUserController),
 );
 
-router.post('/logout', parseJSON, ctrlWrapper(logoutUserController));
+router.post('/logout', parseJSON, authorize, ctrlWrapper(logoutUserController));
 
 router.post('/refresh', ctrlWrapper(refreshUserSessionController));
+
 
 export default router;
