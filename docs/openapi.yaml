@@ -19,8 +19,8 @@ paths:
     post:
       $ref: ../swagger/paths/water/post.yaml
   /water/{id}:
-    get:
-      $ref: ../swagger/paths/water/{id}/get.yaml
+    patch:
+      $ref: ../swagger/paths/water/{id}/patch.yaml
     delete:
       $ref: ../swagger/paths/water/{id}/delete.yaml
   /auth/register:
