@@ -1,0 +1,25 @@
+tags:
+  - Waters
+summary: Delete water by id
+operationId: deleteWaterById
+description: 'Delete water by id'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '66c0bc1bacbe55d40e17d06a'
+responses:
+  '204':
+    description: 'Delete water by id'
+  '404':
+    $ref: '../../../components/responses/404.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '400':
+    $ref: '../../../components/responses/400.yaml'
+  '500':
+    $ref: '../../../components/responses/500.yaml'

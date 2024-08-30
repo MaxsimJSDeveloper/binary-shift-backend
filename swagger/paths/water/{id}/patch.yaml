@@ -1,0 +1,57 @@
+tags:
+  - Waters
+summary: Update water by id
+operationId: patchWaterById
+description: 'Update a record of water intake by id'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '66c0bc1bacbe55d40e17d06a'
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          date:
+            description: 'data of water intake'
+            type: number
+            example: 1519211811670
+          volume:
+            description: 'Volume of water drunk'
+            type: number
+            example: 500
+responses:
+  '200':
+    description: 'Update water by id'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: 'Successfully updated water data!'
+            data:
+              type: object
+              $ref: '../../../components/schemas/water.yaml'
+  '404':
+    $ref: '../../../components/responses/404.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '400':
+    $ref: '../../../components/responses/400.yaml'
+  '500':
+    $ref: '../../../components/responses/500.yaml'

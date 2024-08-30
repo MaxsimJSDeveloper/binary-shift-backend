@@ -1,0 +1,14 @@
+tags:
+  - Auth
+summary: Logout user
+operationId: postLogout
+description: 'Logout a user using cookie parameter'
+security:
+  - bearerAuth: []
+responses:
+  '204':
+    description: Logout a user
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '500':
+    $ref: '../../../components/responses/500.yaml'
