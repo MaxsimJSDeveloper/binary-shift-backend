@@ -1,8 +1,8 @@
 tags:
   - Waters
-summary: Get record of water by id
-operationId: getWaterById
-description: 'Get one record of water intake by id'
+summary: Update water by id
+operationId: patchWaterById
+description: 'Update a record of water intake by id'
 security:
   - bearerAuth: []
 parameters:
@@ -12,9 +12,23 @@ parameters:
     schema:
       type: string
       example: '66c0bc1bacbe55d40e17d06a'
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          date:
+            description: 'data of water intake'
+            type: number
+            example: 1519211811670
+          volume:
+            description: 'Volume of water drunk'
+            type: number
+            example: 500
 responses:
   '200':
-    description: 'Get record of water by id'
+    description: 'Update water by id'
     content:
       application/json:
         schema:
@@ -29,10 +43,10 @@ responses:
               example: 200
             message:
               type: string
-              example: Successfully found contact with id 65ca67e7ae7f10c88b598384!
+              example: 'Successfully updated water data!'
             data:
               type: object
-              $ref: '../../../components/schemas/contact.yaml'
+              $ref: '../../../components/schemas/water.yaml'
   '404':
     $ref: '../../../components/responses/404.yaml'
   '401':

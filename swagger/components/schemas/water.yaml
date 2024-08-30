@@ -6,12 +6,12 @@ required:
   - userId
 properties:
   _id:
-    description: 'id of one intake of water'
+    description: 'ID of one intake of water'
     type: string
     example: 66c0bc1bacbe55d40e17d06a
   date:
     description: 'data of water intake'
-    type: date
+    type: number
     example: 1519211811670
   volume:
     description: 'Volume of water drunk'
