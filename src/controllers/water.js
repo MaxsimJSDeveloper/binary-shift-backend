@@ -1,10 +1,5 @@
 import createHttpError from 'http-errors';
-import {
-  addWater,
-  deleteWater,
-  updateUserDailyNorma,
-  updateWater,
-} from '../services/water.js';
+import { addWater, deleteWater, updateWater } from '../services/water.js';
 
 export const addWaterController = async (req, res) => {
   const waterData = {
@@ -62,26 +57,3 @@ export const deleteWaterController = async (req, res) => {
 //     dailyNorma: data,
 //   });
 // };
-
-export const updateDailyNormaController = async (req, res, next) => {
-  try {
-    const { error, value } = updateDailyNormaSchema.validate(req.body);
-    if (error) {
-      throw createHttpError(400, error.message);
-    }
-
-    const { dailyNorma } = value;
-    const { userId } = req.user;
-
-    const updatedUser = await updateUserDailyNorma(userId, dailyNorma);
-
-    res.status(200).json({
-      status: 'success',
-      data: {
-        dailyNorma: updatedUser.dailyNorma,
-      },
-    });
-  } catch (err) {
-    next(err);
-  }
-};

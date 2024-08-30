@@ -1,4 +1,3 @@
-import { UsersCollection } from '../db/models/user.js';
 import { WatersCollection } from '../db/models/water.js';
 
 export const addWater = async (payload) => {
@@ -38,17 +37,3 @@ export const deleteWater = async (id, userId) => {
 
 //   return data;
 // };
-
-export const updateUserDailyNorma = async (userId, dailyNorma) => {
-  const updatedUser = await UsersCollection.findByIdAndUpdate(
-    userId,
-    { dailyNorma },
-    { new: true, runValidators: true },
-  );
-
-  if (!updatedUser) {
-    throw createHttpError(404, 'User not found');
-  }
-
-  return updatedUser;
-};

@@ -2,7 +2,6 @@ import express from 'express';
 import {
   addWaterController,
   deleteWaterController,
-  updateDailyNormaController,
   updateWaterController,
 } from '../controllers/water.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
@@ -24,8 +23,6 @@ router.use(authorize);
 // router.get('/daily-norma', ctrlWrapper(getDailyNormaController));
 
 // router.put('/daily-norma', ctrlWrapper(updateDailyNormaController));
-
-router.patch('/users/daily-norma', updateDailyNormaController);
 
 router.post(
   '/',
