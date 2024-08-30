@@ -4,11 +4,11 @@ import handlebars from 'handlebars';
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import createHttpError from 'http-errors';
-import { UsersCollection } from '../models/user.js';
+import { UsersCollection } from '../db/models/user.js';
 import { sendEmail } from '../utils/sendMail.js';
-import { TEMPLATES_DIR, SMTP } from '../constants/index.js';
+import { TEMP_UPLOAD_DIR, SMTP } from '../constants/index.js';
 import { env } from '../utils/env.js';
-import { uploadToCloudinary } from '../utils/cloudinary.js';
+import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 
 
 export const getUser = async (userId) => {
@@ -32,7 +32,7 @@ export const updateUserAvatar = async (userId, file) => {
     throw createHttpError(400, 'No file uploaded');
   }
 
-  const avatarUrl = await uploadToCloudinary(file);
+  const avatarUrl = await saveFileToCloudinary(file);
 
   const user = await UsersCollection.findByIdAndUpdate(
     userId,
@@ -65,7 +65,7 @@ export const requestResetToken = async (email) => {
     );
 
     const resetPasswordTemplatePath = path.join(
-      TEMPLATES_DIR,
+      TEMP_UPLOAD_DIR,
       'reset-password-email.html',
     );
 
