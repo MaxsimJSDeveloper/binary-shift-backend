@@ -7,6 +7,12 @@ import {
   updateWaterController,
 } from '../controllers/water.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
+import { authorize } from '../middlewares/authorize.js';
+import {
+  updateWaterIntakeSchema,
+  waterIntakeSchema,
+} from '../validation/water.js';
+import { validateBody } from '../middlewares/validateBody.js';
 
 const router = express.Router();
 const parseJSON = express.json({
@@ -14,15 +20,27 @@ const parseJSON = express.json({
   limit: '100kb',
 });
 
+router.use(authorize);
+
 router.get('/daily-norma', ctrlWrapper(getDailyNormaController));
 
 // router.put('/daily-norma', ctrlWrapper(updateDailyNormaController));
 
-router.post('/', parseJSON, ctrlWrapper(addWaterController));
+router.post(
+  '/',
+  parseJSON,
+  validateBody(waterIntakeSchema),
+  ctrlWrapper(addWaterController),
+);
 
 router.get('/', ctrlWrapper(getWaterController));
 
-router.patch('/:id', parseJSON, ctrlWrapper(updateWaterController));
+router.patch(
+  '/:id',
+  parseJSON,
+  validateBody(updateWaterIntakeSchema),
+  ctrlWrapper(updateWaterController),
+);
 
 router.delete('/:id', ctrlWrapper(deleteWaterController));
 

@@ -5,14 +5,14 @@ import { reformDate } from '../utils/reformDate.js';
 export const addWater = async (payload) => {
   const water = new WatersCollection({
     ...payload,
-    // userId: payload.userId,
+    userId: payload.userId,
   });
   await water.save();
   return water;
 };
 
-export const getAllWater = async ({ filter = {} }) => {
-  const formattedPortions = await WatersCollection.find();
+export const getAllWater = async ({ filter = {}, userId }) => {
+  const formattedPortions = await WatersCollection.find({ userId });
 
   const formattedResult = formattedPortions.map((portion) => ({
     _id: portion._id,
@@ -34,9 +34,9 @@ export const getAllWater = async ({ filter = {} }) => {
   return formattedResult;
 };
 
-export const updateWater = async (id, payload, options = {}) => {
+export const updateWater = async (id, payload, userId, options = {}) => {
   const rawResult = await WatersCollection.findOneAndUpdate(
-    { _id: id },
+    { _id: id, userId },
     payload,
     { new: true, ...options },
   );
@@ -49,10 +49,10 @@ export const updateWater = async (id, payload, options = {}) => {
   };
 };
 
-export const deleteWater = async (id) => {
+export const deleteWater = async (id, userId) => {
   const water = await WatersCollection.findOneAndDelete({
     _id: id,
-    // userId,
+    userId,
   });
   return water;
 };

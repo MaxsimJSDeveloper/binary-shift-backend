@@ -1,5 +1,6 @@
 import createHttpError from 'http-errors';
 import { SessionsCollection } from '../db/models/session.js';
+import { UsersCollection } from '../db/models/user.js'; // Імпортуйте модель користувача
 
 export const authorize = async (req, res, next) => {
   try {
@@ -22,7 +23,15 @@ export const authorize = async (req, res, next) => {
       throw createHttpError(401, 'Access token expired');
     }
 
-    req.userId = session.userId;
+    // Знайти користувача за userId із сесії
+    const user = await UsersCollection.findById(session.userId);
+    if (!user) {
+      throw createHttpError(401, 'User not found');
+    }
+
+    // Додати користувача до req.user для подальшого використання
+    req.user = user;
+
     next();
   } catch (error) {
     next(error);
