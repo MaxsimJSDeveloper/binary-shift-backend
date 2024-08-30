@@ -5,11 +5,8 @@ export const getMouthWater = async ({ filter = {}, userId }) => {
   const formattedPortions = await WatersCollection.find({ userId });
 
   const formattedResult = formattedPortions.map((portion) => ({
-    _id: portion._id,
     date: reformDate(portion.date),
     volume: portion.volume,
-    createdAt: portion.createdAt,
-    updatedAt: portion.updatedAt,
   }));
 
   let filteredResult = formattedResult;
@@ -30,9 +27,9 @@ export const getMouthWater = async ({ filter = {}, userId }) => {
     );
 
     return {
-      data: filteredResult,
+      date: `${filter.day}, ${filter.month}`,
       portions: filteredResult.length,
-      totalVolume, // сума випитої води за обраний день
+      totalVolume,
     };
   }
 
