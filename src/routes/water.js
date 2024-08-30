@@ -2,8 +2,6 @@ import express from 'express';
 import {
   addWaterController,
   deleteWaterController,
-  getDailyNormaController,
-  getWaterController,
   updateWaterController,
 } from '../controllers/water.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
@@ -22,7 +20,7 @@ const parseJSON = express.json({
 
 router.use(authorize);
 
-router.get('/daily-norma', ctrlWrapper(getDailyNormaController));
+// router.get('/daily-norma', ctrlWrapper(getDailyNormaController));
 
 // router.put('/daily-norma', ctrlWrapper(updateDailyNormaController));
 
@@ -32,8 +30,6 @@ router.post(
   validateBody(waterIntakeSchema),
   ctrlWrapper(addWaterController),
 );
-
-router.get('/', ctrlWrapper(getWaterController));
 
 router.patch(
   '/:id',

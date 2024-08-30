@@ -17,7 +17,7 @@
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.5.0",
-    "@redocly/cli": "^1.19.0",
+    "@redocly/cli": "^1.22.0",
     "eslint": "^9.5.0",
     "globals": "^15.6.0",
     "nodemon": "^3.1.4",
