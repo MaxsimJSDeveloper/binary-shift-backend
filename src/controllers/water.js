@@ -19,10 +19,13 @@ export const addWaterController = async (req, res) => {
 export const updateWaterController = async (req, res) => {
   const { id } = req.params;
 
-  const result = await updateWater(id, {
-    ...req.body,
-    userId: req.user._id,
-  });
+  const result = await updateWater(
+    id,
+    {
+      ...req.body,
+    },
+    req.user._id,
+  );
 
   if (!result) {
     throw createHttpError(404, 'Water not found');

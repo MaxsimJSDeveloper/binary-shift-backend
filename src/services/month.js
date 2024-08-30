@@ -5,6 +5,7 @@ export const getMouthWater = async ({ filter = {}, userId }) => {
   const formattedPortions = await WatersCollection.find({ userId });
 
   const formattedResult = formattedPortions.map((portion) => ({
+    id: portion.id,
     date: reformDate(portion.date),
     volume: portion.volume,
   }));
