@@ -1,0 +1,31 @@
+type: object
+required:
+  - _id
+  - date
+  - volume
+  - userId
+properties:
+  _id:
+    description: 'id of one intake of water'
+    type: string
+    example: 66c0bc1bacbe55d40e17d06a
+  date:
+    description: 'data of water intake'
+    type: date
+    example: 1519211811670
+  volume:
+    description: 'Volume of water drunk'
+    type: number
+    example: 500
+  userId:
+    description: 'Id of user who made this entry'
+    type: string
+    example: 66c0bc1bacbe55d40e17d06a
+  createdAt:
+    description: 'Create data'
+    type: string
+    example: '2024-08-20T18:21:38.106Z'
+  updatedAt:
+    description: 'Update data'
+    type: string
+    example: '2024-08-20T18:21:38.106Z'

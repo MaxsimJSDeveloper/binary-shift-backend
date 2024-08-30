@@ -1,0 +1,51 @@
+tags:
+  - Waters
+summary: Create new water portion
+operationId: createWater
+description: 'Create a new portion of water with payload'
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        required:
+          - date
+          - volume
+        properties:
+          date:
+            description: 'data of water intake'
+            type: number
+            example: 1519211811670
+          volume:
+            description: 'Volume of water drunk'
+            type: number
+            example: 500
+responses:
+  '201':
+    description: Creates a new portion of water
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Successfully add water!
+            data:
+              type: object
+              $ref: ..\..\components\schemas\water.yaml
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

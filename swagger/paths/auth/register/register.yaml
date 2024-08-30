@@ -1,0 +1,71 @@
+tags:
+  - Auth
+summary: Create user
+operationId: postRegister
+description: 'Create a user with payload'
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - name
+          - email
+          - password
+          - gender
+        properties:
+          name:
+            description: "User's name"
+            type: string
+            example: 'Maria Petrenko'
+          email:
+            description: "The user's email"
+            type: string
+            example: 'alex@gmail.com'
+          password:
+            description: "The password user's email"
+            type: string
+            example: '123456789'
+          gender:
+            description: 'Gender of the user'
+            type: string
+            enum: ['male', 'female', 'other']
+            example: male
+            default: female
+          photo:
+            description: "User's photo"
+            type: string
+            example: ''
+            default: 'https://res.cloudinary.com/uqwgdu/image/upload/image.png'
+          dailyNorma:
+            description: "User's daily rate of water"
+            type: number
+            example: 1500
+            default: 2000
+responses:
+  '201':
+    description: Creates a user
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: 'User successfully registered!'
+            data:
+              type: object
+              $ref: ../../../components/schemas/user.yaml
+  '400':
+    $ref: '../../../components/responses/400.yaml'
+  '500':
+    $ref: '../../../components/responses/500.yaml'
