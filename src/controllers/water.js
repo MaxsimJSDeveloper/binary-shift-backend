@@ -16,7 +16,6 @@ export const getWaterController = async (req, res) => {
     status: 200,
     message: 'Success!',
     data: waters,
-    amountOfWater: waters.length,
   });
 };
 
@@ -44,7 +43,7 @@ export const updateWaterController = async (req, res) => {
   });
 
   if (!result) {
-    return res.status(404).json({ message: 'Water not found' });
+    throw createHttpError(404, 'Water not found');
   }
 
   res.json({

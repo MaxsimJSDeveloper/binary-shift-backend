@@ -22,8 +22,10 @@ export const getAllWater = async ({ filter = {}, userId }) => {
     updatedAt: portion.updatedAt,
   }));
 
+  let filteredResult = formattedResult;
+
   if (filter.day !== undefined || filter.month) {
-    return formattedResult.filter((portion) => {
+    filteredResult = formattedResult.filter((portion) => {
       const [day, month] = portion.date.split(', ');
       const matchesDay = filter.day ? parseInt(day) === filter.day : true;
       const matchesMonth = filter.month ? month === filter.month : true;
@@ -31,7 +33,14 @@ export const getAllWater = async ({ filter = {}, userId }) => {
     });
   }
 
-  return formattedResult;
+  if (filter.day !== undefined) {
+    return {
+      data: filteredResult,
+      portions: filteredResult.length,
+    };
+  }
+
+  return filteredResult;
 };
 
 export const updateWater = async (id, payload, userId, options = {}) => {
