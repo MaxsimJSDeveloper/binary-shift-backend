@@ -41,12 +41,11 @@ export const updateWaterController = async (req, res) => {
 export const deleteWaterController = async (req, res) => {
   const { id } = req.params;
 
-  const deletedWater = await deleteWater(id, req.user._id);
+  await deleteWater(id, req.user._id);
 
-  res.status(200).json({
-    status: 200,
+  res.status(204).json({
+    status: 204,
     message: 'Successfully deleted',
-    data: deletedWater,
   });
 };
 
