@@ -12,8 +12,9 @@ import {
   resetPasswordController,
   updateUserController,
   updateUserAvatarController,
+  getUserController
 } from '../controllers/user';
-import { updateUserValidationSchema, userValidationSchema } from '../validation/user';
+import { updateUserValidationSchema } from '../validation/user';
 
 const router = express.Router();
 const parseJSON = express.json({
@@ -23,30 +24,35 @@ const parseJSON = express.json({
 
   router.use(authorize);
 
-router.post('/',
-parseJSON,
-upload.single('photo'),
-validateBody(userValidationSchema),
-ctrlWrapper(updateUserController)
+
+router.get('/', authorize, ctrlWrapper(getUserController));
+
+router.patch(
+  '/userId',
+  parseJSON,
+  authorize,
+  validateBody(updateUserValidationSchema),
+  ctrlWrapper(updateUserController)
 );
 
 router.patch(
-    '/:userId',
-    parseJSON,
-    upload.single('photo'),
-    isValidId,
-    validateBody(updateUserValidationSchema),
-    ctrlWrapper(updateUserAvatarController),
-  );
+  '/avatar',
+  authorize,
+  parseJSON,
+  upload.single('avatar'),
+  ctrlWrapper(updateUserAvatarController)
+);
 
 router.post(
   '/request-reset-email',
+  parseJSON,
   validateBody(requestResetEmailSchema),
   ctrlWrapper(requestResetEmailController),
 );
 
 router.post(
   '/reset-password',
+  parseJSON,
   validateBody(resetPasswordSchema),
   ctrlWrapper(resetPasswordController),
 );

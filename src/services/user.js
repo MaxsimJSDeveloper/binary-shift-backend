@@ -8,6 +8,16 @@ import { UsersCollection } from '../models/user.js';
 import { sendEmail } from '../utils/sendMail.js';
 import { TEMPLATES_DIR, SMTP } from '../constants/index.js';
 import { env } from '../utils/env.js';
+import { uploadToCloudinary } from '../utils/cloudinary.js';
+
+
+export const getUser = async (userId) => {
+  const user = await UsersCollection.findById(userId);
+  if (!user) {
+    throw createHttpError(404, 'User not found');
+  }
+  return user;
+};
 
 export const updateUser = async (userId, updateData) => {
   const user = await UsersCollection.findByIdAndUpdate(userId, updateData, { new: true });
@@ -17,11 +27,23 @@ export const updateUser = async (userId, updateData) => {
   return user;
 };
 
-export const updateUserAvatar = async (userId, avatarUrl) => {
-  const user = await UsersCollection.findByIdAndUpdate(userId, { photo: avatarUrl }, { new: true });
+export const updateUserAvatar = async (userId, file) => {
+  if (!file) {
+    throw createHttpError(400, 'No file uploaded');
+  }
+
+  const avatarUrl = await uploadToCloudinary(file);
+
+  const user = await UsersCollection.findByIdAndUpdate(
+    userId,
+    { photo: avatarUrl },
+    { new: true }
+  );
+
   if (!user) {
     throw createHttpError(404, 'User not found');
   }
+
   return user;
 };
 
