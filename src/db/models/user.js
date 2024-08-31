@@ -11,7 +11,7 @@ const usersSchema = new Schema(
       default: 'female',
     },
     photo: { type: String, default: '' },
-    dailyNorma: { type: Number, default: 2000 },
+    dailyNorma: { type: Number, min:0, max: 15000, default: 2000 },
   },
   { timestamps: true, versionKey: false },
 );
