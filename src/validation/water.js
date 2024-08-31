@@ -10,6 +10,6 @@ export const updateWaterIntakeSchema = Joi.object({
   date: Joi.date(),
 });
 
-export const dayNormalWaterSchema = Joi.object({
-  volume: Joi.number().positive().max(15000),
+export const dailyNormaWaterSchema = Joi.object({
+  dailyNorma: Joi.number().positive().max(15000),
 });
