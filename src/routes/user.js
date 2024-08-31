@@ -29,7 +29,7 @@ router.use(authorize);
 router.get('/', authorize, ctrlWrapper(getUserController));
 
 router.patch(
-  '/userId',
+  '/:userId',
   parseJSON,
   authorize,
   isValidId,
