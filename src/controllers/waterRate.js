@@ -1,4 +1,20 @@
-import { updateUser } from "../services/waterRate.js";
+import { updateUser, getDailyNorma } from "../services/waterRate.js";
+
+export const getDailyNormaController = async (req, res, next) => {
+  try {
+    const dailyNorma = await getDailyNorma(req.user._id);
+
+    res.json({
+      message: 'Daily water intake retrieved successfully!',
+      status: 200,
+      data: {
+        dailyNorma,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const updateWaterRateController = async (req, res, next) => {
   try {
