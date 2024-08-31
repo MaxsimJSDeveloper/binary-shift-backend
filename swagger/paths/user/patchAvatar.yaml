@@ -1,0 +1,49 @@
+tags:
+  - Users
+summary: Update the user's avatar
+operationId: patchUsersAvatar
+description: "Update the user's avatar"
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        required:
+          - photo
+        properties:
+          photo:
+            description: "User's photo"
+            type: string
+            example: ''
+            default: 'https://res.cloudinary.com/uqwgdu/image/upload/image.png'
+responses:
+  '200':
+    description: "Update the user's avatar"
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: 'User avatar updated successfully!'
+            data:
+              type: object
+              $ref: '../../components/schemas/user.yaml'
+  '404':
+    $ref: '../../components/responses/404.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

@@ -2,14 +2,32 @@ type: object
 required:
   - _id
   - name
-  # - email
-  # - gender
 properties:
   _id:
     description: "User's id"
     type: string
     example: 66c0bc1bacbe55d40e17d06a
+  name:
+    description: "User's name"
+    type: string
+    example: 'Maria Petrenko'
   email:
     description: "The user's email"
     type: string
-    example: 'alina@gmail.com'
+    example: 'alex@gmail.com'
+  gender:
+    description: 'Gender of the user'
+    type: string
+    enum: ['male', 'female', 'other']
+    example: male
+    default: female
+  photo:
+    description: "User's photo"
+    type: string
+    example: 'https://res.cloudinary.com/uqwgdu/image/upload/image.png'
+    default: ''
+  dailyNorma:
+    description: "User's daily rate of water"
+    type: number
+    example: 1500
+    default: 2000

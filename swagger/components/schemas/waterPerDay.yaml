@@ -1,0 +1,23 @@
+type: object
+required:
+  - data
+  - dailyNorm
+  - dailyNormPercent
+  - portions
+properties:
+  data:
+    description: 'Date of water intake'
+    type: string
+    example: 30, august
+  dailyNorm:
+    description: 'Daily rate of water chosen by the user'
+    type: number
+    example: 2000
+  dailyNormPercent:
+    description: 'The ratio of drunk water to the daily norm'
+    type: number
+    example: 60.0%
+  portions:
+    description: 'Number of water records per day'
+    type: number
+    example: 6

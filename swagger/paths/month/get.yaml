@@ -1,0 +1,46 @@
+tags:
+  - Month
+summary: Get array of water intake records
+operationId: getWaterPerMonth
+description: 'Get array of water intake records'
+security:
+  - bearerAuth: []
+parameters:
+  - in: query
+    name: month
+    schema:
+      type: string
+      example: august
+  - in: query
+    name: day
+    schema:
+      type: number
+      example: 15
+responses:
+  '200':
+    description: Successfully found records!
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Success!
+            data:
+              type: array
+              items:
+                $ref: ..\..\components\schemas\waterPerDay.yaml
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '404':
+    $ref: '../../components/responses/404.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

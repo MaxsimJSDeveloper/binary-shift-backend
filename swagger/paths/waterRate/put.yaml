@@ -1,8 +1,8 @@
 tags:
-  - Waters
-summary: Create new water portion
-operationId: createWater
-description: 'Create a new portion of water with payload'
+  - WaterRate
+summary: Update user's water rate
+operationId: putWaterRate
+description: "Update user's water rate"
 security:
   - bearerAuth: []
 requestBody:
@@ -10,21 +10,13 @@ requestBody:
     application/json:
       schema:
         type: object
-        required:
-          - date
-          - volume
         properties:
-          date:
-            description: 'data of water intake'
-            type: number
-            example: 1519211811670
           volume:
-            description: 'Volume of water drunk'
             type: number
-            example: 500
+            example: 1500
 responses:
-  '201':
-    description: Creates a new portion of water
+  '200':
+    description: "Update user's water rate"
     content:
       application/json:
         schema:
@@ -36,16 +28,21 @@ responses:
           properties:
             status:
               type: integer
-              example: 201
+              example: 200
             message:
               type: string
-              example: Successfully add water!
+              example: 'success'
             data:
               type: object
-              $ref: ..\..\components\schemas\water.yaml
-  '400':
-    $ref: '../../components/responses/400.yaml'
+              properties:
+                dailyNorma:
+                  type: number
+                  example: 1500
+  '404':
+    $ref: '../../components/responses/404.yaml'
   '401':
     $ref: '../../components/responses/401.yaml'
+  '400':
+    $ref: '../../components/responses/400.yaml'
   '500':
     $ref: '../../components/responses/500.yaml'
