@@ -1,13 +1,43 @@
 openapi: 3.1.0
 info:
   version: 1.0.0
-  title: Binary Shift app
+  title: Water Tracker App
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  description: This is a documentation of Binary Shift app
+  description: |-
+    This is a documentation of Water Tracker App
+    *Функціональні можливості:**
+
+    Реєстрація та авторизація користувачів
+
+    Відновлення паролю через пошту
+
+    Редагування загальної інформації про користувача
+
+    Редагування аватару профеля користувача
+
+    Додавання, редагування та видалення записів випитої кількості води
+
+    Отримання масиву зведеної інформації по записах юзера протягом місяця за кожен день
+
+    Відображення усіх записів за окремий день
+
+    Відображення денної норми води обраної користувачем
+
+    Редагування денної норми води обраної користувачем
+
+    **Стек технологій, що використовується у проекті:**
+
+    Node.js - середовище виконання JavaScript на сервері
+
+    Express.js - фреймворк для розробки веб-додатків на Node.js
+
+    MongoDB - NoSQL база даних
+
+    Mongoose - бібліотека для роботи з MongoDB у Node.js
 tags:
-  - name: Binary Shift
+  - name: Water Tracker App
     description: Operations about users.
   - name: Auth
     description: Auth operations.
@@ -32,6 +62,26 @@ paths:
   /auth/logout:
     post:
       $ref: ../swagger/paths/auth/logout/logout.yaml
+  /user/{id}:
+    patch:
+      $ref: ../swagger/paths/user/{id}/patch.yaml
+  /user/avatar:
+    patch:
+      $ref: ../swagger/paths/user/patchAvatar.yaml
+  /user/request-reset-email:
+    post:
+      $ref: ../swagger/paths/user/requestResetEmail.yaml
+  /user/reset-password:
+    post:
+      $ref: ../swagger/paths/user/resetPwd.yaml
+  /month:
+    get:
+      $ref: ../swagger/paths/month/get.yaml
+  /water-rate:
+    get:
+      $ref: ../swagger/paths/waterRate/get.yaml
+    put:
+      $ref: ../swagger/paths/waterRate/put.yaml
 components:
   securitySchemes:
     bearerAuth:

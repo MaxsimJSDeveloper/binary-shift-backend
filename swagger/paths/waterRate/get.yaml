@@ -1,0 +1,30 @@
+tags:
+  - WaterRate
+summary: Get user's water rate
+operationId: getWaterRate
+description: "Get user's water rate "
+security:
+  - bearerAuth: []
+responses:
+  '200':
+    description: Successfully found water rate!
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - message
+            - data
+          properties:
+            message:
+              type: string
+              example: Success!
+            dailyNorma:
+              type: number
+              example: 2000
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '404':
+    $ref: '../../components/responses/404.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

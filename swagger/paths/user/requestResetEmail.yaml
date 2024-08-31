@@ -1,8 +1,8 @@
 tags:
-  - Auth
-summary: Create user
-operationId: postRegister
-description: 'Create a user with payload'
+  - Users
+summary: Send reset pwd email
+operationId: postSendResetEmail
+description: 'Send reset password email'
 security:
   - bearerAuth: []
 requestBody:
@@ -12,19 +12,14 @@ requestBody:
         type: object
         required:
           - email
-          - password
         properties:
           email:
             description: "The user's email"
             type: string
             example: 'alex@gmail.com'
-          password:
-            description: "The password user's email"
-            type: string
-            example: '123456789'
 responses:
-  '201':
-    description: Creates a user
+  '200':
+    description: Send reset pwd email
     content:
       application/json:
         schema:
@@ -36,14 +31,13 @@ responses:
           properties:
             status:
               type: integer
-              example: 201
+              example: 200
             message:
               type: string
-              example: 'User successfully registered!'
+              example: 'Reset password email was successfully sent!'
             data:
               type: object
-              $ref: ..\..\..\components\schemas\userRegister.yaml
-  '400':
-    $ref: '../../../components/responses/400.yaml'
+  '404':
+    $ref: '../../components/responses/404.yaml'
   '500':
-    $ref: '../../../components/responses/500.yaml'
+    $ref: '../../components/responses/500.yaml'
