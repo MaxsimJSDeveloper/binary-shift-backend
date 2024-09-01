@@ -7,43 +7,52 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   description: |-
     This is a documentation of Water Tracker App
-    *Функціональні можливості:**
 
-    Реєстрація та авторизація користувачів
+    *Functional capabilities:**
 
-    Відновлення паролю через пошту
+    User registration and authorization
 
-    Редагування загальної інформації про користувача
+    Password recovery by mail
 
-    Редагування аватару профеля користувача
+    Editing general user information
 
-    Додавання, редагування та видалення записів випитої кількості води
+    Editing a user's profile avatar
 
-    Отримання масиву зведеної інформації по записах юзера протягом місяця за кожен день
+    Adding, editing and deleting records of the amount of water consumed
 
-    Відображення усіх записів за окремий день
+    Receiving an array of aggregated information on user records during the month for each day
 
-    Відображення денної норми води обраної користувачем
+    Display of all records for a single day
 
-    Редагування денної норми води обраної користувачем
+    Display of the daily rate of water selected by the user
 
-    **Стек технологій, що використовується у проекті:**
+    Editing of the daily rate of water selected by the user
 
-    Node.js - середовище виконання JavaScript на сервері
+    **The technology stack used in the project:**
 
-    Express.js - фреймворк для розробки веб-додатків на Node.js
+    Node.js - JavaScript runtime on the server
 
-    MongoDB - NoSQL база даних
+    Express.js - A framework for developing web applications on Node.js
 
-    Mongoose - бібліотека для роботи з MongoDB у Node.js
+    MongoDB - NoSQL database
+
+    Mongoose - A library for working with MongoDB in Node.js
 tags:
-  - name: Water Tracker App
+  - name: Users
     description: Operations about users.
   - name: Auth
     description: Auth operations.
+  - name: Water
+    description: Operations with records of water consumption.
+  - name: WaterRate
+    description: Operations with the daily rate of water selected by the user.
+  - name: Month
+    description: Returning summary information about days for a month.
+  - name: Today
+    description: Returning all records of water consumption for the day.
 servers:
   - url: http://localhost:8080
-  - url: https://example.com/api/v1
+  - url: https://binary-shift-backend.onrender.com
 paths:
   /water:
     post:
@@ -65,6 +74,9 @@ paths:
   /user/{id}:
     patch:
       $ref: ../swagger/paths/user/{id}/patch.yaml
+  /user:
+    get:
+      $ref: ../swagger/paths/user/get.yaml
   /user/avatar:
     patch:
       $ref: ../swagger/paths/user/patchAvatar.yaml
@@ -82,6 +94,9 @@ paths:
       $ref: ../swagger/paths/waterRate/get.yaml
     put:
       $ref: ../swagger/paths/waterRate/put.yaml
+  /today:
+    get:
+      $ref: ../swagger/paths/today/get.yaml
 components:
   securitySchemes:
     bearerAuth:

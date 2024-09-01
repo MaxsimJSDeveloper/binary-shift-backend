@@ -26,18 +26,15 @@ responses:
             - message
             - data
           properties:
+            message:
+              type: string
+              example: 'Daily water intake updated successfully!'
             status:
               type: integer
               example: 200
-            message:
-              type: string
-              example: 'success'
             data:
               type: object
-              properties:
-                dailyNorma:
-                  type: number
-                  example: 1500
+              $ref: ..\..\components\schemas\user.yaml
   '404':
     $ref: '../../components/responses/404.yaml'
   '401':

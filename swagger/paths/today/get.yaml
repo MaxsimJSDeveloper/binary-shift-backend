@@ -1,0 +1,40 @@
+tags:
+  - Today
+summary: Get all records of water for the day
+operationId: getToday
+description: 'Get all records of water for the day'
+security:
+  - bearerAuth: []
+responses:
+  '200':
+    description: Successfully found records for the day
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - message
+            - status
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully!
+            data:
+              type: object
+              properties:
+                percentageConsumed:
+                  type: string
+                  example: 60%
+                numberOfValue:
+                  type: array
+                  $ref: ..\..\components\schemas\water.yaml
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '404':
+    $ref: '../../components/responses/404.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'
