@@ -1,6 +1,9 @@
 import express from 'express';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
-import {updateWaterRateController, getDailyNormaController} from '../controllers/waterRate.js';
+import {
+  updateWaterRateController,
+  getDailyNormaController,
+} from '../controllers/waterRate.js';
 import { authorize } from '../middlewares/authorize.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { dailyNormaWaterSchema } from '../validation/water.js';
@@ -10,18 +13,13 @@ const parseJSON = express.json();
 
 router.use(authorize);
 
-router.get(
-  '/:id',
-  authorize,
-  parseJSON,
-  ctrlWrapper(getDailyNormaController)
-);
+router.get('/:id', authorize, parseJSON, ctrlWrapper(getDailyNormaController));
 
-router.patch(
+router.put(
   '/:id',
   parseJSON,
   validateBody(dailyNormaWaterSchema),
-  ctrlWrapper(updateWaterRateController)
+  ctrlWrapper(updateWaterRateController),
 );
 
 export default router;
