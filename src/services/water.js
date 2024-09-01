@@ -31,9 +31,3 @@ export const deleteWater = async (id, userId) => {
   });
   return water;
 };
-
-// export const getDailyNorma = async () => {
-//   const data = await UsersCollection.find();
-
-//   return data;
-// };

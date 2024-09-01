@@ -20,10 +20,6 @@ const parseJSON = express.json({
 
 router.use(authorize);
 
-// router.get('/daily-norma', ctrlWrapper(getDailyNormaController));
-
-// router.put('/daily-norma', ctrlWrapper(updateDailyNormaController));
-
 router.post(
   '/',
   parseJSON,

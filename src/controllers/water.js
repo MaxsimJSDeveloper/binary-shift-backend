@@ -48,12 +48,3 @@ export const deleteWaterController = async (req, res) => {
     message: 'Successfully deleted',
   });
 };
-
-// export const getDailyNormaController = async (req, res) => {
-//   const data = await getDailyNorma({ userId: req.user._id });
-
-//   res.status(200).json({
-//     message: `Success!`,
-//     dailyNorma: data,
-//   });
-// };

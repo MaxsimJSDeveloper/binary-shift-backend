@@ -4,7 +4,7 @@ import waterRateRouter from './waterRate.js';
 import authRouter from './auth.js';
 import userRouter from './user.js';
 import monthRouter from './month.js';
-import todayRouter from './today.js'; // Убедитесь, что этот импорт присутствует
+import todayRouter from './today.js';
 
 const router = Router();
 
