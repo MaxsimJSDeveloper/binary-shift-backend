@@ -238,7 +238,28 @@
         ],
         "responses": {
           "204": {
-            "description": "Delete water by id"
+            "description": "Delete water by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully deleted"
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "$ref": "#/components/responses/400"
@@ -439,6 +460,69 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Refresh token",
+        "operationId": "postRefreshToken",
+        "description": "Login a user with refresh token",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login a user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully refreshed a session!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "accessToken": {
+                          "type": "string",
+                          "example": "33Kgjzc6ObYqH51qaYMA5LM8JHWv7NPT59tLLsBe"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
           },
           "500": {
             "$ref": "#/components/responses/500"
@@ -857,7 +941,7 @@
             "name": "day",
             "schema": {
               "type": "number",
-              "example": 15
+              "example": 30
             }
           }
         ],
@@ -1200,14 +1284,12 @@
           "photo": {
             "description": "User's photo",
             "type": "string",
-            "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png",
-            "default": ""
+            "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
           },
           "dailyNorma": {
             "description": "User's daily rate of water",
             "type": "number",
-            "example": 1500,
-            "default": 2000
+            "example": 1500
           }
         }
       },

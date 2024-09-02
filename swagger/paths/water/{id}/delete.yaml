@@ -15,6 +15,20 @@ parameters:
 responses:
   '204':
     description: 'Delete water by id'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: 'Successfully deleted'
   '404':
     $ref: '../../../components/responses/404.yaml'
   '401':

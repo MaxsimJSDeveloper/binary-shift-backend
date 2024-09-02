@@ -25,9 +25,7 @@ properties:
     description: "User's photo"
     type: string
     example: 'https://res.cloudinary.com/uqwgdu/image/upload/image.png'
-    default: ''
   dailyNorma:
     description: "User's daily rate of water"
     type: number
     example: 1500
-    default: 2000
