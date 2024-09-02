@@ -71,6 +71,9 @@ paths:
   /auth/logout:
     post:
       $ref: ../swagger/paths/auth/logout/logout.yaml
+  /auth/refresh:
+    post:
+      $ref: ../swagger/paths/auth/refresh/refresh.yaml
   /user/{id}:
     patch:
       $ref: ../swagger/paths/user/{id}/patch.yaml

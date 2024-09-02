@@ -15,7 +15,7 @@ parameters:
     name: day
     schema:
       type: number
-      example: 15
+      example: 30
 responses:
   '200':
     description: Successfully found records!
