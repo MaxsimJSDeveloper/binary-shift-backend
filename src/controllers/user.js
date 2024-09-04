@@ -16,6 +16,10 @@ export const getUserController = async (req, res) => {
 
 export const updateUserController = async (req, res) => {
   const updatedUser = await updateUser(req.user._id, req.body);
+
+  console.log('Request body:', req.body); // Логування тіла запиту
+  console.log('User ID:', req.user._id); // Логування ID користувача
+
   res.json({
     message: 'User information updated successfully!',
     status: 200,

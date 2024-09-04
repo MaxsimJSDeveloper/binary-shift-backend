@@ -29,10 +29,9 @@ router.use(authorize);
 router.get('/', authorize, ctrlWrapper(getUserController));
 
 router.patch(
-  '/:userId',
-  parseJSON,
+  '/',
   authorize,
-  isValidId,
+  parseJSON,
   validateBody(updateUserValidationSchema),
   ctrlWrapper(updateUserController),
 );
