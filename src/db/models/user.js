@@ -2,7 +2,7 @@ import { model, Schema } from 'mongoose';
 
 const usersSchema = new Schema(
   {
-    name: { type: String },
+    name: { type: String, default: 'user' },
     email: { type: String, required: true, unique: true },
     password: { type: String, minlength: 8, maxlength: 64, required: true },
     gender: {
@@ -11,7 +11,7 @@ const usersSchema = new Schema(
       default: 'female',
     },
     photo: { type: String, default: '' },
-    dailyNorma: { type: Number, min:0, max: 15000, default: 2000 },
+    dailyNorma: { type: Number, min: 0, max: 15000, default: 2000 },
   },
   { timestamps: true, versionKey: false },
 );

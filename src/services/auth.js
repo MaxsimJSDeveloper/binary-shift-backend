@@ -27,7 +27,7 @@ export const loginUser = async (payload) => {
 
   const isEqual = await bcrypt.compare(payload.password, user.password);
   if (!isEqual) {
-    throw createHttpError(401, 'Unathorized');
+    throw createHttpError(401, 'Unauthorized');
   }
 
   await SessionsCollection.deleteOne({ userId: user._id });
@@ -35,13 +35,15 @@ export const loginUser = async (payload) => {
   const accessToken = randomBytes(30).toString('base64');
   const refreshToken = randomBytes(30).toString('base64');
 
-  return await SessionsCollection.create({
+  const session = await SessionsCollection.create({
     userId: user._id,
     accessToken,
     refreshToken,
     accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
     refreshTokenValidUntil: new Date(Date.now() + ONE_DAY),
   });
+
+  return { session, user };
 };
 
 export const logoutUser = async (sessionId) => {
