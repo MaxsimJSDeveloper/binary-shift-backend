@@ -18,13 +18,34 @@ export const getUser = async (userId) => {
   return user;
 };
 
-export const updateUser = async (userId, updateData) => {
-  const user = await UsersCollection.findByIdAndUpdate(userId, updateData, {
-    new: true,
-  });
+export const updateUser = async (
+  userId,
+  { name, email, gender, outdatedPassword, newPassword },
+) => {
+  const user = await UsersCollection.findById(userId);
+
   if (!user) {
     throw createHttpError(404, 'User not found');
   }
+
+  if (outdatedPassword && newPassword) {
+    const isPasswordMatch = await bcrypt.compare(
+      outdatedPassword,
+      user.password,
+    );
+    if (!isPasswordMatch) {
+      throw createHttpError(400, 'Current password is incorrect');
+    }
+    user.password = await bcrypt.hash(newPassword, 10);
+  }
+
+  user.name = name || user.name;
+  user.email = email || user.email;
+  user.gender = gender || user.gender;
+
+  await user.save();
+
+  user.password = undefined;
   return user;
 };
 
