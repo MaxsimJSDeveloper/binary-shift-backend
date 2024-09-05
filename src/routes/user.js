@@ -3,7 +3,7 @@ import { validateBody } from '../middlewares/validateBody.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { authorize } from '../middlewares/authorize.js';
 import { upload } from '../middlewares/multer.js';
-import { isValidId } from '../middlewares/isValidId.js';
+// import { isValidId } from '../middlewares/isValidId.js';
 
 import {
   requestResetEmailController,
@@ -39,8 +39,6 @@ router.patch(
 router.patch(
   '/avatar',
   authorize,
-  parseJSON,
-  isValidId,
   upload.single('avatar'),
   ctrlWrapper(updateUserAvatarController),
 );

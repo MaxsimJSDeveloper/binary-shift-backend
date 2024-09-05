@@ -26,7 +26,7 @@ export const updateUserController = async (req, res) => {
 
 export const updateUserAvatarController = async (req, res) => {
   const updatedUser = await updateUserAvatar(req.user._id, req.file);
-  res.json({
+  res.status(200).send({
     message: 'User avatar updated successfully!',
     status: 200,
     data: updatedUser,

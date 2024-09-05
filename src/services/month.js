@@ -13,10 +13,8 @@ export const getMonthWater = async ({ filter = {}, userId }) => {
   const dailyNorm = user.dailyNorma;
   const portions = await WatersCollection.find({ userId });
 
-  // Форматування дат
   const formattedPortions = portions.map(formatPortionDate);
 
-  // Фільтрація за роком та місяцем
   const filteredPortions = formattedPortions.filter((portion) => {
     return (
       (!filter.year || portion.year === filter.year) &&
