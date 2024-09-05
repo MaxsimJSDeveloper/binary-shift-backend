@@ -22,7 +22,7 @@ export const updateUser = async (
   userId,
   { name, email, gender, outdatedPassword, newPassword },
 ) => {
-  const user = await UsersCollection.findById(userId);
+  const user = await UsersCollection.findByIdAndUpdate(userId);
 
   if (!user) {
     throw createHttpError(404, 'User not found');
