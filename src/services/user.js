@@ -49,14 +49,14 @@ export const updateUser = async (
     updatedFields.password = hashedNewPassword;
   }
 
-  const updatedUser = await UsersCollection.findByIdAndUpdate(
+  const upgradedUser = await UsersCollection.findByIdAndUpdate(
     userId,
     updatedFields,
     { new: true },
   );
 
-  updatedUser.password = undefined;
-  return updateUser;
+  upgradedUser.password = undefined;
+  return upgradedUser;
 };
 
 export const updateUserAvatar = async (userId, file) => {
