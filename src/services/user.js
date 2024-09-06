@@ -20,7 +20,7 @@ export const getUser = async (userId) => {
 
 export const updateUser = async (
   userId,
-  { name, email, gender, outdatedPassword, newPassword },
+  { name, email, gender, password, newPassword },
 ) => {
   const user = await UsersCollection.findByIdAndUpdate(userId);
 
@@ -28,25 +28,35 @@ export const updateUser = async (
     throw createHttpError(404, 'User not found');
   }
 
-  if (outdatedPassword && newPassword) {
+  if (password) {
     const isPasswordMatch = await bcrypt.compare(
-      outdatedPassword,
+      password,
       user.password,
     );
     if (!isPasswordMatch) {
       throw createHttpError(400, 'Current password is incorrect');
     }
-    user.password = await bcrypt.hash(newPassword, 10);
   }
 
-  user.name = name || user.name;
-  user.email = email || user.email;
-  user.gender = gender || user.gender;
+  let updatedFields = {};
 
-  await user.save();
+  if (name) updatedFields.name = name;
+  if (email) updatedFields.email = email;
+  if (gender) updatedFields.gender = gender;
 
-  user.password = undefined;
-  return user;
+  if (newPassword) {
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+    updatedFields.password = hashedNewPassword;
+  }
+
+  const updatedUser = await UsersCollection.findByIdAndUpdate(
+    userId,
+    updatedFields,
+    { new: true },
+  );
+
+  updatedUser.password = undefined;
+  return updateUser;
 };
 
 export const updateUserAvatar = async (userId, file) => {

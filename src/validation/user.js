@@ -21,9 +21,10 @@ export const userValidationSchema = Joi.object({
 export const updateUserValidationSchema = Joi.object({
   name: Joi.string().min(3).max(30),
   email: Joi.string().email(),
-  newPassword: Joi.string().min(8).max(64),
+  password: Joi.string().min(8).max(64).allow(''),
+  newPassword: Joi.string().min(8).max(64).allow(''),
   gender: Joi.string().valid('male', 'female').default('female'),
   photo: Joi.string(),
   dailyNorma: Joi.number().positive(),
-  outdatedPassword: Joi.string().min(8).max(64),
+
 });
