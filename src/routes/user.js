@@ -3,7 +3,6 @@ import { validateBody } from '../middlewares/validateBody.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { authorize } from '../middlewares/authorize.js';
 import { upload } from '../middlewares/multer.js';
-// import { isValidId } from '../middlewares/isValidId.js';
 
 import {
   requestResetEmailController,
