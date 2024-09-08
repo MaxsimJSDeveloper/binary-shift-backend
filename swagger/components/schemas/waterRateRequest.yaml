@@ -1,6 +1,6 @@
 type: object
 properties:
-  volume:
+  dailyNorma:
     type: number
     example: 1500
     maximum: 1500
