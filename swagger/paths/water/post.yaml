@@ -9,19 +9,7 @@ requestBody:
   content:
     application/json:
       schema:
-        type: object
-        required:
-          - date
-          - volume
-        properties:
-          date:
-            description: 'data of water intake'
-            type: number
-            example: 1519211811670
-          volume:
-            description: 'Volume of water drunk'
-            type: number
-            example: 500
+        $ref: ..\..\components\schemas\createWaterRequest.yaml
 responses:
   '201':
     description: Creates a new portion of water
@@ -42,7 +30,7 @@ responses:
               example: Successfully add water!
             data:
               type: object
-              $ref: ..\..\components\schemas\water.yaml
+              $ref: ..\..\components\schemas\waterRespond.yaml
   '400':
     $ref: '../../components/responses/400.yaml'
   '401':

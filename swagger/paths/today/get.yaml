@@ -31,7 +31,7 @@ responses:
                   example: 60%
                 numberOfValue:
                   type: array
-                  $ref: ..\..\components\schemas\water.yaml
+                  $ref: ..\..\components\schemas\waterRespond.yaml
   '401':
     $ref: '../../components/responses/401.yaml'
   '404':

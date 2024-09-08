@@ -9,11 +9,7 @@ requestBody:
   content:
     application/json:
       schema:
-        type: object
-        properties:
-          volume:
-            type: number
-            example: 1500
+        $ref: ..\..\components\schemas\waterRateRequest.yaml
 responses:
   '200':
     description: "Update user's water rate"
@@ -34,7 +30,7 @@ responses:
               example: 200
             data:
               type: object
-              $ref: ..\..\components\schemas\user.yaml
+              $ref: ..\..\components\schemas\userRespond.yaml
   '404':
     $ref: '../../components/responses/404.yaml'
   '401':

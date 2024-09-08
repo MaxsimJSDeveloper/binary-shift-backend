@@ -9,19 +9,7 @@ requestBody:
   content:
     application/json:
       schema:
-        type: object
-        required:
-          - email
-          - password
-        properties:
-          email:
-            description: "The user's email"
-            type: string
-            example: 'alex@gmail.com'
-          password:
-            description: "The password user's email"
-            type: string
-            example: '123456789'
+        $ref: ..\..\..\components\schemas\loginRequest.yaml
 responses:
   '201':
     description: Creates a user
@@ -42,7 +30,7 @@ responses:
               example: 'User successfully registered!'
             data:
               type: object
-              $ref: ..\..\..\components\schemas\userRegister.yaml
+              $ref: ..\..\..\components\schemas\userRegisterRespond.yaml
   '400':
     $ref: '../../../components/responses/400.yaml'
   '500':

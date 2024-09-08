@@ -9,14 +9,7 @@ requestBody:
   content:
     application/json:
       schema:
-        type: object
-        required:
-          - email
-        properties:
-          email:
-            description: "The user's email"
-            type: string
-            example: 'alex@gmail.com'
+        $ref: ..\..\components\schemas\resetEmailRequest.yaml
 responses:
   '200':
     description: Send reset pwd email
