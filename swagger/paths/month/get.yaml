@@ -7,15 +7,23 @@ security:
   - bearerAuth: []
 parameters:
   - in: query
+    name: year
+    schema:
+      type: number
+      example: 2024
+      format: number
+  - in: query
     name: month
     schema:
       type: string
       example: august
+      format: string
   - in: query
     name: day
     schema:
       type: number
       example: 30
+      minLength: 31
 responses:
   '200':
     description: Successfully found records!
@@ -37,7 +45,7 @@ responses:
             data:
               type: array
               items:
-                $ref: ..\..\components\schemas\waterPerDay.yaml
+                $ref: ..\..\components\schemas\waterPerDayRespond.yaml
   '401':
     $ref: '../../components/responses/401.yaml'
   '404':

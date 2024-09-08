@@ -42,6 +42,7 @@ export const loginUserController = async (req, res) => {
         name: user.name,
         gender: user.gender,
         photo: user.photo,
+        dailyNorma: user.dailyNorma
       },
     },
   });

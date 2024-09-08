@@ -61,23 +61,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "required": [
-                  "date",
-                  "volume"
-                ],
-                "properties": {
-                  "date": {
-                    "description": "data of water intake",
-                    "type": "number",
-                    "example": 1519211811670
-                  },
-                  "volume": {
-                    "description": "Volume of water drunk",
-                    "type": "number",
-                    "example": 500
-                  }
-                }
+                "$ref": "#/components/schemas/createWaterRequest"
               }
             }
           }
@@ -105,7 +89,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/water"
+                      "$ref": "#/components/schemas/waterRespond"
                     }
                   }
                 }
@@ -152,19 +136,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "date": {
-                    "description": "data of water intake",
-                    "type": "number",
-                    "example": 1519211811670
-                  },
-                  "volume": {
-                    "description": "Volume of water drunk",
-                    "type": "number",
-                    "example": 500
-                  }
-                }
+                "$ref": "#/components/schemas/updateWaterRequest"
               }
             }
           }
@@ -192,7 +164,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/water"
+                      "$ref": "#/components/schemas/waterRespond"
                     }
                   }
                 }
@@ -293,23 +265,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "required": [
-                  "email",
-                  "password"
-                ],
-                "properties": {
-                  "email": {
-                    "description": "The user's email",
-                    "type": "string",
-                    "example": "alex@gmail.com"
-                  },
-                  "password": {
-                    "description": "The password user's email",
-                    "type": "string",
-                    "example": "123456789"
-                  }
-                }
+                "$ref": "#/components/schemas/loginRequest"
               }
             }
           }
@@ -337,7 +293,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/userRegister"
+                      "$ref": "#/components/schemas/userRegisterRespond"
                     }
                   }
                 }
@@ -370,23 +326,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "required": [
-                  "email",
-                  "password"
-                ],
-                "properties": {
-                  "email": {
-                    "description": "The user's email",
-                    "type": "string",
-                    "example": "alex@gmail.com"
-                  },
-                  "password": {
-                    "description": "The password user's email",
-                    "type": "string",
-                    "example": "123456789"
-                  }
-                }
+                "$ref": "#/components/schemas/loginRequest"
               }
             }
           }
@@ -418,6 +358,9 @@
                         "accessToken": {
                           "type": "string",
                           "example": "33Kgjzc6ObYqH51qaYMA5LM8JHWv7NPT59tLLsBe"
+                        },
+                        "user": {
+                          "$ref": "#/components/schemas/userRespond"
                         }
                       }
                     }
@@ -530,76 +473,31 @@
         }
       }
     },
-    "/user/{id}": {
+    "/user": {
       "patch": {
         "tags": [
           "Users"
         ],
-        "summary": "Update user by id",
-        "operationId": "patchUserById",
-        "description": "Update user by id",
+        "summary": "Update user info",
+        "operationId": "patchUserInfo",
+        "description": "Update user info",
         "security": [
           {
             "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "66c0bc1bacbe55d40e17d06a"
-            }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "description": "User's name",
-                    "type": "string",
-                    "example": "Maria Petrenko"
-                  },
-                  "email": {
-                    "description": "The user's email",
-                    "type": "string",
-                    "example": "alex@gmail.com"
-                  },
-                  "password": {
-                    "description": "The password user's email",
-                    "type": "string",
-                    "example": "123456789"
-                  },
-                  "gender": {
-                    "description": "Gender of the user",
-                    "type": "string",
-                    "enum": [
-                      "male",
-                      "female",
-                      "other"
-                    ],
-                    "example": "male",
-                    "default": "female"
-                  },
-                  "dailyNorma": {
-                    "description": "User's daily rate of water",
-                    "type": "number",
-                    "example": 1500,
-                    "default": 2000
-                  }
-                }
+                "$ref": "#/components/schemas/userRequest"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Update user by id",
+            "description": "Update user info",
             "content": {
               "application/json": {
                 "schema": {
@@ -620,7 +518,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/user"
+                      "$ref": "#/components/schemas/userRespond"
                     }
                   }
                 }
@@ -640,9 +538,7 @@
             "$ref": "#/components/responses/500"
           }
         }
-      }
-    },
-    "/user": {
+      },
       "get": {
         "tags": [
           "Users"
@@ -673,7 +569,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/user"
+                      "$ref": "#/components/schemas/userRespond"
                     }
                   }
                 }
@@ -748,7 +644,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/user"
+                      "$ref": "#/components/schemas/userRespond"
                     }
                   }
                 }
@@ -787,17 +683,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "required": [
-                  "email"
-                ],
-                "properties": {
-                  "email": {
-                    "description": "The user's email",
-                    "type": "string",
-                    "example": "alex@gmail.com"
-                  }
-                }
+                "$ref": "#/components/schemas/resetEmailRequest"
               }
             }
           }
@@ -857,17 +743,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "required": [
-                  "password"
-                ],
-                "properties": {
-                  "password": {
-                    "description": "The password user's email",
-                    "type": "string",
-                    "example": "123456789"
-                  }
-                }
+                "$ref": "#/components/schemas/resetPwdRequest"
               }
             }
           }
@@ -895,7 +771,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/user"
+                      "$ref": "#/components/schemas/userRespond"
                     }
                   }
                 }
@@ -930,10 +806,20 @@
         "parameters": [
           {
             "in": "query",
+            "name": "year",
+            "schema": {
+              "type": "number",
+              "example": 2024,
+              "format": "number"
+            }
+          },
+          {
+            "in": "query",
             "name": "month",
             "schema": {
               "type": "string",
-              "example": "august"
+              "example": "august",
+              "format": "string"
             }
           },
           {
@@ -941,7 +827,8 @@
             "name": "day",
             "schema": {
               "type": "number",
-              "example": 30
+              "example": 30,
+              "minLength": 31
             }
           }
         ],
@@ -969,7 +856,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/waterPerDay"
+                        "$ref": "#/components/schemas/waterPerDayRespond"
                       }
                     }
                   }
@@ -1059,13 +946,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "volume": {
-                    "type": "number",
-                    "example": 1500
-                  }
-                }
+                "$ref": "#/components/schemas/waterRateRequest"
               }
             }
           }
@@ -1093,7 +974,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "$ref": "#/components/schemas/user"
+                      "$ref": "#/components/schemas/userRespond"
                     }
                   }
                 }
@@ -1158,7 +1039,7 @@
                         },
                         "numberOfValue": {
                           "type": "array",
-                          "$ref": "#/components/schemas/water"
+                          "$ref": "#/components/schemas/waterRespond"
                         }
                       }
                     }
@@ -1188,7 +1069,28 @@
       }
     },
     "schemas": {
-      "water": {
+      "createWaterRequest": {
+        "type": "object",
+        "required": [
+          "date",
+          "volume"
+        ],
+        "properties": {
+          "date": {
+            "description": "data of water intake",
+            "type": "number",
+            "example": 1519211811670,
+            "format": "date"
+          },
+          "volume": {
+            "description": "Volume of water drunk",
+            "type": "number",
+            "example": 500,
+            "maximum": 500
+          }
+        }
+      },
+      "waterRespond": {
         "type": "object",
         "required": [
           "_id",
@@ -1229,7 +1131,48 @@
           }
         }
       },
-      "userRegister": {
+      "updateWaterRequest": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "description": "data of water intake",
+            "type": "number",
+            "example": 1519211811670,
+            "format": "date"
+          },
+          "volume": {
+            "description": "Volume of water drunk",
+            "type": "number",
+            "example": 500,
+            "maximum": 500,
+            "format": "number"
+          }
+        }
+      },
+      "loginRequest": {
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "description": "The user's email",
+            "type": "string",
+            "example": "alex@gmail.com",
+            "format": "email"
+          },
+          "password": {
+            "description": "The password user's email",
+            "type": "string",
+            "example": "123456789",
+            "minLength": 8,
+            "maxLength": 64,
+            "format": "string"
+          }
+        }
+      },
+      "userRegisterRespond": {
         "type": "object",
         "required": [
           "_id",
@@ -1248,7 +1191,7 @@
           }
         }
       },
-      "user": {
+      "userRespond": {
         "type": "object",
         "required": [
           "_id",
@@ -1293,7 +1236,83 @@
           }
         }
       },
-      "waterPerDay": {
+      "userRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "User's name",
+            "type": "string",
+            "example": "Maria Petrenko",
+            "minLength": 3,
+            "maxLength": 30,
+            "format": "string"
+          },
+          "email": {
+            "description": "The user's email",
+            "type": "string",
+            "example": "alex@gmail.com",
+            "format": "email"
+          },
+          "password": {
+            "description": "The password user's email",
+            "type": "string",
+            "example": "123456789",
+            "minLength": 8,
+            "maxLength": 64,
+            "format": "string"
+          },
+          "gender": {
+            "description": "Gender of the user",
+            "type": "string",
+            "enum": [
+              "male",
+              "female",
+              "other"
+            ],
+            "example": "male",
+            "default": "female",
+            "format": "string"
+          },
+          "dailyNorma": {
+            "description": "User's daily rate of water",
+            "type": "number",
+            "example": 1500,
+            "default": 1500,
+            "maximum": 15000
+          }
+        }
+      },
+      "resetEmailRequest": {
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "email": {
+            "description": "The user's email",
+            "type": "string",
+            "example": "alex@gmail.com",
+            "format": "email"
+          }
+        }
+      },
+      "resetPwdRequest": {
+        "type": "object",
+        "required": [
+          "password"
+        ],
+        "properties": {
+          "password": {
+            "description": "The password user's email",
+            "type": "string",
+            "example": "123456789",
+            "minLength": 8,
+            "maxLength": 64,
+            "format": "string"
+          }
+        }
+      },
+      "waterPerDayRespond": {
         "type": "object",
         "required": [
           "data",
@@ -1321,6 +1340,17 @@
             "description": "Number of water records per day",
             "type": "number",
             "example": 6
+          }
+        }
+      },
+      "waterRateRequest": {
+        "type": "object",
+        "properties": {
+          "volume": {
+            "type": "number",
+            "example": 1500,
+            "maximum": 1500,
+            "format": "number"
           }
         }
       }

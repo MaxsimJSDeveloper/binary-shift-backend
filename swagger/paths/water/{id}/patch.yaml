@@ -16,16 +16,7 @@ requestBody:
   content:
     application/json:
       schema:
-        type: object
-        properties:
-          date:
-            description: 'data of water intake'
-            type: number
-            example: 1519211811670
-          volume:
-            description: 'Volume of water drunk'
-            type: number
-            example: 500
+        $ref: ..\..\..\components\schemas\updateWaterRequest.yaml
 responses:
   '200':
     description: 'Update water by id'
@@ -46,7 +37,7 @@ responses:
               example: 'Successfully updated water data!'
             data:
               type: object
-              $ref: '../../../components/schemas/water.yaml'
+              $ref: ..\..\..\components\schemas\waterRespond.yaml
   '404':
     $ref: '../../../components/responses/404.yaml'
   '401':

@@ -74,10 +74,9 @@ paths:
   /auth/refresh:
     post:
       $ref: ../swagger/paths/auth/refresh/refresh.yaml
-  /user/{id}:
-    patch:
-      $ref: ../swagger/paths/user/{id}/patch.yaml
   /user:
+    patch:
+      $ref: ../swagger/paths/user/patch.yaml
     get:
       $ref: ../swagger/paths/user/get.yaml
   /user/avatar:

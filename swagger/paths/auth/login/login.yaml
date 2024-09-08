@@ -9,19 +9,7 @@ requestBody:
   content:
     application/json:
       schema:
-        type: object
-        required:
-          - email
-          - password
-        properties:
-          email:
-            description: "The user's email"
-            type: string
-            example: 'alex@gmail.com'
-          password:
-            description: "The password user's email"
-            type: string
-            example: '123456789'
+        $ref: ..\..\..\components\schemas\loginRequest.yaml
 responses:
   '200':
     description: Login a user
@@ -46,6 +34,8 @@ responses:
                 accessToken:
                   type: string
                   example: 33Kgjzc6ObYqH51qaYMA5LM8JHWv7NPT59tLLsBe
+                user:
+                  $ref: ..\..\..\components\schemas\userRespond.yaml
   '400':
     $ref: '../../../components/responses/400.yaml'
   '401':
