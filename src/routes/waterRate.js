@@ -13,10 +13,10 @@ const parseJSON = express.json();
 
 router.use(authorize);
 
-router.get('/:id', authorize, parseJSON, ctrlWrapper(getDailyNormaController));
+router.get('/', authorize, parseJSON, ctrlWrapper(getDailyNormaController));
 
 router.put(
-  '/:id',
+  '/',
   parseJSON,
   validateBody(dailyNormaWaterSchema),
   ctrlWrapper(updateWaterRateController),
