@@ -1,0 +1,9 @@
+type: object
+required:
+  - email
+properties:
+  email:
+    description: "The user's email"
+    type: string
+    example: 'alex@gmail.com'
+    format: email

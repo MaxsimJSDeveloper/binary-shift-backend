@@ -9,14 +9,7 @@ requestBody:
   content:
     application/json:
       schema:
-        type: object
-        required:
-          - password
-        properties:
-          password:
-            description: "The password user's email"
-            type: string
-            example: '123456789'
+        $ref: ..\..\components\schemas\resetPwdRequest.yaml
 responses:
   '200':
     description: Reset password a user
@@ -37,7 +30,7 @@ responses:
               example: 'Password reset successfully!'
             data:
               type: object
-              $ref: ../../components/schemas/user.yaml
+              $ref: ../../components/schemas/userRespond.yaml
   '401':
     $ref: '../../components/responses/401.yaml'
   '404':

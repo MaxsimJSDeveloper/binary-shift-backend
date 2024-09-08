@@ -21,7 +21,7 @@ responses:
               example: 200
             data:
               type: object
-              $ref: ..\..\components\schemas\user.yaml
+              $ref: ..\..\components\schemas\userRespond.yaml
   '401':
     $ref: '../../components/responses/401.yaml'
   '404':

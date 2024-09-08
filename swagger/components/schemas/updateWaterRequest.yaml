@@ -1,0 +1,13 @@
+type: object
+properties:
+  date:
+    description: 'data of water intake'
+    type: number
+    example: 1519211811670
+    format: date
+  volume:
+    description: 'Volume of water drunk'
+    type: number
+    example: 500
+    maximum: 500
+    format: number
