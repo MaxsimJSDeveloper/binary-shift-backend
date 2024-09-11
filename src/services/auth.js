@@ -6,7 +6,7 @@ import path from 'node:path';
 import fs from 'node:fs/promises';
 import handlebars from 'handlebars';
 import jwt from 'jsonwebtoken';
-import { TEMP_UPLOAD_DIR, SMTP } from '../constants/index.js';
+import { TEMPLATES_DIR, SMTP } from '../constants/index.js';
 import { UsersCollection } from '../db/models/user.js';
 import { SessionsCollection } from '../db/models/session.js';
 import { FIFTEEN_MINUTES, ONE_DAY } from '../constants/index.js';
@@ -107,7 +107,7 @@ export const requestResetToken = async (email) => {
     env('JWT_SECRET'),
     { expiresIn: '15m' },
   );
-  const templatePath = path.join(TEMP_UPLOAD_DIR, 'reset-password-email.html');
+  const templatePath = path.join(TEMPLATES_DIR, 'reset-password-email.html');
   const templateSource = (await fs.readFile(templatePath)).toString();
   const template = handlebars.compile(templateSource);
 
