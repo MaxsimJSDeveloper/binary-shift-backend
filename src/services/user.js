@@ -6,7 +6,7 @@ import fs from 'node:fs/promises';
 import createHttpError from 'http-errors';
 import { UsersCollection } from '../db/models/user.js';
 import { sendEmail } from '../utils/sendMail.js';
-import { TEMP_UPLOAD_DIR, SMTP } from '../constants/index.js';
+import { TEMPLATES_DIR, SMTP } from '../constants/index.js';
 import { env } from '../utils/env.js';
 import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 
@@ -97,7 +97,7 @@ export const requestResetToken = async (email) => {
   );
 
   const resetPasswordTemplatePath = path.join(
-    TEMP_UPLOAD_DIR,
+    TEMPLATES_DIR,
     'reset-password-email.html',
   );
 
