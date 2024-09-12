@@ -51,7 +51,6 @@ tags:
   - name: Today
     description: Returning all records of water consumption for the day.
 servers:
-  - url: http://localhost:8080
   - url: https://binary-shift-backend.onrender.com
 paths:
   /water:
