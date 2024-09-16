@@ -7,15 +7,28 @@ import router from './routes/index.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import cookieParser from 'cookie-parser';
- import { UPLOAD_DIR } from './constants/index.js';
+import { UPLOAD_DIR } from './constants/index.js';
 import { swaggerDocs } from './middlewares/swaggerDocs.js';
 
 const PORT = Number(env('PORT', '8080'));
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'https://binary-shift.vercel.app',
+];
+
+const corsOptions = {
+  origin: allowedOrigins,
+  credentials: true,
+};
+
 export const startServer = () => {
   const app = express();
 
-  app.use(cors());
+  app.use(cors(corsOptions));
+
+  app.options('*', cors(corsOptions));
 
   app.use(cookieParser());
 
